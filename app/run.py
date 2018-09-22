@@ -15,13 +15,6 @@ from wordcloud import WordCloud, STOPWORDS
 import random
 from collections import Counter
 
-'''
-from flask_debugtoolbar import DebugToolbarExtension
-app.debug = True
-app.config['SECRET_KEY'] = '<replace with a secret key>'
-app = Flask(__name__)
-toolbar = DebugToolbarExtension(app)
-'''
 import re
 import nltk
 from nltk.stem import PorterStemmer, WordNetLemmatizer
@@ -39,15 +32,9 @@ app = Flask(__name__)
 
 def tokenize(text):
     '''
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
-
-    clean_tokens = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        clean_tokens.append(clean_tok)
-
-    return clean_tokens'''
+	Input: Text 
+	Returns: Tokenized Text,post usage of lemmatiser
+	'''
     posts = text
     temp = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', 'link', posts)
     temp = re.sub("[^a-zA-Z]", " ", temp)

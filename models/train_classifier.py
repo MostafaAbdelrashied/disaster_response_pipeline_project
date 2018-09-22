@@ -41,6 +41,10 @@ lemmatiser = WordNetLemmatizer()
 cachedStopWords = stopwords.words("english")
 
 def load_data(database_filepath):
+	'''
+	Input: FilePath of the Database
+	Returns: Dataframe splitted into message and their tags
+	'''
     engine = create_engine('sqlite:///'+database_filepath)
     name_of_the_table='YourTableName'
     df = pd.read_sql_table(name_of_the_table,engine)
@@ -50,6 +54,10 @@ def load_data(database_filepath):
     return X,Y,categories,df
 
 def tokenize(text):
+	'''
+	Input: Text 
+	Returns: Tokenized Text,post usage of lemmatiser	
+	'''
     posts = text
     temp = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', 'link', posts)
     temp = re.sub("[^a-zA-Z]", " ", temp)
@@ -60,6 +68,9 @@ def tokenize(text):
 
 
 def build_model():
+	'''
+	Returns: pipeline with customer tokenizer and multi output classifier
+	'''
     pipeline = Pipeline([
                 ('tfidf', TfidfVectorizer(tokenizer=tokenize)),
                 ('clf', MultiOutputClassifier(
@@ -70,6 +81,10 @@ def build_model():
 
 
 def evaluate_model(model, X_test, X_train, category_names,train,test):
+	'''
+	Input: Model along with with test, train and categories dataframes
+	Returns: Tuned Model
+	'''
     print('... Processing ')    
     categories=category_names
     # compute the testing accuracy
@@ -107,6 +122,9 @@ def evaluate_model(model, X_test, X_train, category_names,train,test):
     return grid_search_tune
 
 def save_model(model, model_filepath):
+	'''
+	Saving the model to pickle
+	'''
     pickle.dump(model, open(model_filepath, 'wb'))
 
 
