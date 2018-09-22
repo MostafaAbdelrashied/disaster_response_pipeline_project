@@ -38,6 +38,8 @@ Here's the file structure of the project:
 Due to size limitation of Github, classifier.pkl is kept in the Google Share Drive
 https://drive.google.com/drive/folders/13s52ZwrHu_d90-HG33C0o2t1x3OhanLM?ogsrc=32
 
+The tuning process takes around 45 minutes
+
 ### Front End App
 ![Home Page](https://github.com/SmokeShine/disaster_response_pipeline_project/blob/master/app/FrontEnd1.png)
 ### Message Categorization
