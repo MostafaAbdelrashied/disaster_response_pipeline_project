@@ -75,7 +75,7 @@ def build_model():
                 ('tfidf', TfidfVectorizer(tokenizer=tokenize)),
                 ('clf', MultiOutputClassifier(
                                               RandomForestClassifier
-                                              (n_estimators=100, random_state=1), n_jobs=1)),
+                                              (n_estimators=100, random_state=1), n_jobs=-1)),
             ])
     return pipeline
 
@@ -90,6 +90,16 @@ def evaluate_model(model, X_test, X_train, category_names,train,test):
     # compute the testing accuracy
     prediction = model.predict(X_test)
     predictionTrain = model.predict(X_train)
+	#printing accuracy score for each categories  - For rubric "The accuracy, precision and recall for the test set is outputted for each category."
+    i=0
+    for category in categories:
+        print('Test accuracy for category - {} is {}'.format(category,accuracy_score(test[category].values, prediction[:,i])))
+        print("Classification Report")
+        print(classification_report(test[category], prediction[:,i]))
+        print("Confusion Matrix")
+        print(confusion_matrix(test[category], prediction[:,1]))
+        print("***"*30)
+        i=i+1
     print('Train accuracy is {}'.format(accuracy_score(train[categories].values.flatten(), predictionTrain.flatten())))
     print('Test accuracy is {}'.format(accuracy_score(test[categories].values.flatten(), prediction.flatten())))
     print("Classification Report for Train")
@@ -104,7 +114,7 @@ def evaluate_model(model, X_test, X_train, category_names,train,test):
         'clf__estimator__criterion': ['gini', 'entropy'],
         'clf__estimator__n_estimators': [50, 100],
     }
-    grid_search_tune = GridSearchCV(model, parameters, cv=2, n_jobs=1, verbose=3)
+    grid_search_tune = GridSearchCV(model, parameters, cv=2, n_jobs=-1, verbose=3)
     #pdb.set_trace()                                
     grid_search_tune.fit(X_train, train[categories])
     print("Best parameters set ")
@@ -119,6 +129,17 @@ def evaluate_model(model, X_test, X_train, category_names,train,test):
     print(classification_report(test[categories].values.flatten(), prediction.flatten()))
     print("Test Confusion Matrix")
     print(confusion_matrix(test[categories].values.flatten(), prediction.flatten()))
+	#printing accuracy score for each categories  - For rubric "The accuracy, precision and recall for the test set is outputted for each category."
+    i=0
+    for category in categories:
+        print('Test accuracy for category - {} is {}'.format(category,accuracy_score(test[category].values, prediction[:,i])))
+        print("Classification Report")
+        print(classification_report(test[category], prediction[:,i]))
+        print("Confusion Matrix")
+        print(confusion_matrix(test[category], prediction[:,1]))
+        print("***"*30)
+        i=i+1
+
     return grid_search_tune
 
 def save_model(model, model_filepath):
