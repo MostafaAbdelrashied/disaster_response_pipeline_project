@@ -35,6 +35,17 @@ Here's the file structure of the project:
 - README.md
 ```
 
+ 
+### Important Files:
+The input files are kept in data folder, and they are disaster_categories.csv and disaster_messages.csv.
+1. Disaster_messages contain id, the translated message and the original message
+2. Disaster_categories contain id along with the associated categorization
+
+data/process_data.py: The ETL pipeline used to process data in preparation for model building.
+models/train_classifier.py: The Machine Learning pipeline used to fit, tune, evaluate, and export the model to a Python pickle (pickle is not uploaded to the repo due to size constraints.).
+app/templates/*.html: HTML templates for the web app.
+run.py: Start the Python server for the web app and prepare visualizations.
+
 Due to size limitation of Github, classifier.pkl is kept in the Google Share Drive
 https://drive.google.com/drive/folders/13s52ZwrHu_d90-HG33C0o2t1x3OhanLM?ogsrc=32
 
@@ -44,3 +55,4 @@ The tuning process takes around 45 minutes
 ![Home Page](https://github.com/SmokeShine/disaster_response_pipeline_project/blob/master/app/FrontEnd1.png)
 ### Message Categorization
 ![Categorization](https://github.com/SmokeShine/disaster_response_pipeline_project/blob/master/app/FrontEnd2.png)
+
