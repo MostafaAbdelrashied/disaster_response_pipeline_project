@@ -42,9 +42,13 @@ The input files are kept in data folder, and they are disaster_categories.csv an
 2. Disaster_categories contain id along with the associated categorization
 
 data/process_data.py: The ETL pipeline used to process data in preparation for model building.
+
 models/train_classifier.py: The Machine Learning pipeline used to fit, tune, evaluate, and export the model to a Python pickle (pickle is not uploaded to the repo due to size constraints.).
+
 app/templates/*.html: HTML templates for the web app.
+
 run.py: Start the Python server for the web app and prepare visualizations.
+
 
 Due to size limitation of Github, classifier.pkl is kept in the Google Share Drive
 https://drive.google.com/drive/folders/13s52ZwrHu_d90-HG33C0o2t1x3OhanLM?ogsrc=32
